@@ -4,10 +4,15 @@
 	</head>
 	
 	<body>
-          <script>var TestIDopts = {options_TestID}</script>
+          <script>var opts_Campaign = {options_Campaign}</script>
+          <script>var opts_TestID = {options_TestID}</script>
+        <body onload="updateCampaign()">
+          
 	  <form name="uploadForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <select id="selectTestSite" name="TestSite" onchange='updateCampaign()'>
+	      {options_TestSite}
+	    </select>
             <select id="selectCampaign" name="Campaign" onchange='updateTestID()'>
-	      {options_Campaign}
 	    </select>
 	    <select id="selectTestID" name="TestID">
 	    </select><br>

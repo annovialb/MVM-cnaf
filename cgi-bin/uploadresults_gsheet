@@ -27,16 +27,23 @@ def printForm(opU,opF):
     for i in opF.keys() :
         options+='<option style="color: #cccccc; background-color:#FF0000"  value="%s">%s</option>' %(i,i)
 
-    options_Campaign=""
+    options_TestSite=""
+    options_Campaign=[]
     options_TestID=[]
-    for i in opU.keys() :
-        options_Campaign+='<option value="%s">%s</option>' %(i,i)
-        options_TestID.append("")
-        for j in opU[i].keys() :
+    for i in opU.keys():
+        options_TestSite+='<option value="%s">%s</option>' %(i,i)
+        options_Campaign.append("")
+        options_TestID.append([])
+        for j in opU[i].keys():
             myvalue="%s"%(j)
-            options_TestID[-1]+="<option value=\'%s\'>%s</option>"%(myvalue,myvalue)
+            options_Campaign[-1]+="<option value=\'%s\'>%s</option>"%(myvalue,myvalue)
+            options_TestID[-1].append("")
+            for k in opU[i][j]:
+                myvalue="%s"%(k)
+                options_TestID[-1][-1]+="<option value=\'%s\'>%s</option>"%(myvalue,myvalue)
+
         
-    print(form_template.format(options_Campaign=options_Campaign, options=options, options_TestID=options_TestID))
+    print(form_template.format(options_TestSite=options_TestSite, options_Campaign=options_Campaign, options_TestID=options_TestID))
 
 
 def receiveAndSaveToGoogleSheet(dict_ids, col_simulator_filename, col_mvm_filename, service, SAMPLE_SPREADSHEET_ID):
